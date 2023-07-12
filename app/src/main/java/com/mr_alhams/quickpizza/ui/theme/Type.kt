@@ -1,6 +1,7 @@
 package com.mr_alhams.quickpizza.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -31,4 +32,22 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
+)
+
+val titleSmall = TextStyle(
+    color = Color.Black,
+    fontSize = 14.sp,
+    fontWeight = FontWeight.Normal,
+)
+
+val labelLarge = TextStyle(
+    color = Color.Black,
+    fontSize = 24.sp,
+    fontWeight = FontWeight.Bold,
+)
+
+val labelMedium = TextStyle(
+color = Color.Black,
+fontSize = 20.sp,
+fontWeight = FontWeight.Normal,
 )
