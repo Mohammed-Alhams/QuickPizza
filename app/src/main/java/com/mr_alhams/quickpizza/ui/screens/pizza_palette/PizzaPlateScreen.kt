@@ -72,20 +72,7 @@ fun PizzaPlateContent(
             modifier = Modifier.padding(top = 36.dp),
         ) {
 
-            val size = when(currentPizzaType.sizeType){
-                PizzaSize.SMALL -> 220
-                PizzaSize.MEDIUM -> 240
-                PizzaSize.LARGE -> 260
-            }
-
-            val pizzaSize by animateDpAsState(targetValue = size.dp, label = "")
-
-            Image(
-                painter = painterResource(id = currentPizzaType.image),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(pizzaSize)
-            )
+            Bread(currentPizzaType)
         }
 
         Text(
@@ -129,4 +116,22 @@ fun PizzaPlateContent(
         }
 
     }
+}
+
+@Composable
+private fun Bread(currentPizzaType: PizzaUiState) {
+    val size = when (currentPizzaType.sizeType) {
+        PizzaSize.SMALL -> 220
+        PizzaSize.MEDIUM -> 240
+        PizzaSize.LARGE -> 260
+    }
+
+    val pizzaSize by animateDpAsState(targetValue = size.dp, label = "")
+
+    Image(
+        painter = painterResource(id = currentPizzaType.image),
+        contentDescription = null,
+        modifier = Modifier
+            .size(pizzaSize)
+    )
 }
