@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -26,8 +27,9 @@ fun ChipPizzaTopping(
         contentDescription = null,
         modifier = Modifier
             .size(64.dp)
+            .clip(CircleShape)
             .clickable { onClick() }
-            .background(color = backgroundColor, shape = CircleShape)
+            .background(color = backgroundColor)
             .padding(8.dp)
     )
 }

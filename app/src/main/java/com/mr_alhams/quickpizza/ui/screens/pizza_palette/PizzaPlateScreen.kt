@@ -1,8 +1,7 @@
 package com.mr_alhams.quickpizza.ui.screens.pizza_palette
 
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.PagerState
@@ -22,14 +20,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mr_alhams.quickpizza.R
 import com.mr_alhams.quickpizza.ui.screens.pizza_palette.composables.ChipPizzaTopping
+import com.mr_alhams.quickpizza.ui.screens.pizza_palette.composables.PizzaBread
 import com.mr_alhams.quickpizza.ui.screens.pizza_palette.composables.PizzaPlateSlider
 import com.mr_alhams.quickpizza.ui.screens.pizza_palette.composables.PizzaSizeChip
+import com.mr_alhams.quickpizza.ui.screens.pizza_palette.composables.PizzaToppings
 import com.mr_alhams.quickpizza.ui.theme.labelLarge
 import com.mr_alhams.quickpizza.ui.theme.titleSmall
 
@@ -49,7 +48,7 @@ fun PizzaPlateScreen(
 }
 
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun PizzaPlateContent(
     pagerState: PagerState,
@@ -70,9 +69,14 @@ fun PizzaPlateContent(
             pagerState = pagerState,
             itemsCount = state.pizzaTypes.size,
             modifier = Modifier.padding(top = 36.dp),
-        ) {
+        ) { currentIndex ->
 
-            Bread(currentPizzaType)
+            PizzaBread(state.pizzaTypes[currentIndex]) { pizzaSize ->
+                state.pizzaTypes[currentIndex].pizzaToppingsUiState.forEach { pizzaToppingsUiState ->
+                    PizzaToppings(pizzaToppingsUiState, pizzaSize)
+                }
+            }
+
         }
 
         Text(
@@ -116,22 +120,4 @@ fun PizzaPlateContent(
         }
 
     }
-}
-
-@Composable
-private fun Bread(currentPizzaType: PizzaUiState) {
-    val size = when (currentPizzaType.sizeType) {
-        PizzaSize.SMALL -> 220
-        PizzaSize.MEDIUM -> 240
-        PizzaSize.LARGE -> 260
-    }
-
-    val pizzaSize by animateDpAsState(targetValue = size.dp, label = "")
-
-    Image(
-        painter = painterResource(id = currentPizzaType.image),
-        contentDescription = null,
-        modifier = Modifier
-            .size(pizzaSize)
-    )
 }

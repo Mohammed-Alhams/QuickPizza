@@ -24,13 +24,14 @@ fun PizzaPlateSlider(
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
     ) {
 
         Image(
             painter = painterResource(id = R.drawable.plate),
             contentDescription = null,
-            modifier = Modifier.size(300.dp).align(Alignment.Center)
+            modifier = Modifier.size(300.dp)
         )
 
         HorizontalPager(
@@ -38,7 +39,6 @@ fun PizzaPlateSlider(
             pageCount = itemsCount,
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.Center)
         ) {
             content(it)
         }

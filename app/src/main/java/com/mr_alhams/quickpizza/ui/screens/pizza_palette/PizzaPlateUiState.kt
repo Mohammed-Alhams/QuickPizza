@@ -19,6 +19,13 @@ enum class PizzaSize(val letter: String) {
 }
 
 data class PizzaToppingsUiState(
+    val pizzaToppingType: PizzaToppings = PizzaToppings.NOTHING,
     val image: Int = 0,
     val isSelected: Boolean = false,
+    val toppingsImages: List<Int> = emptyList(),
+    val toppingsPositions: List<Pair<Double, Double>> = emptyList(),
 )
+
+enum class PizzaToppings{
+    BASIL, BROCCOLI, ONION, SAUSAGE, MUSHROOM, NOTHING
+}
