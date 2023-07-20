@@ -200,21 +200,23 @@ class PizzaPlateViewModel @Inject constructor() : ViewModel(), PizzaPlateInterac
     ) {
         val clickedPizzaIndex = _uiState.value.pizzaTypes.indexOf(pizzaUiState)
 
-        val clickedToppingIndex =
-            _uiState.value.pizzaTypes[clickedPizzaIndex]
+        val clickedToppingIndex = _uiState.value.pizzaTypes[clickedPizzaIndex]
                 .pizzaToppingsUiState.indexOf(toppingsUiState)
 
         val alteredToppingsList =
             _uiState.value.pizzaTypes[clickedPizzaIndex].pizzaToppingsUiState.toMutableList()
 
         if (!toppingsUiState.isSelected) {
-
             val random = Random
-
             val randomPositions: MutableList<Pair<Double, Double>> = mutableListOf()
 
             repeat(20) {
-                randomPositions.add(Pair(random.nextDouble(0.1, 0.75), random.nextDouble(0.1, 0.75)))
+                randomPositions.add(
+                    Pair(
+                        random.nextDouble(0.15, 0.80),
+                        random.nextDouble(0.1, 0.75)
+                    )
+                )
             }
 
             val toppingList = when (toppingsUiState.pizzaToppingType) {
@@ -226,11 +228,17 @@ class PizzaPlateViewModel @Inject constructor() : ViewModel(), PizzaPlateInterac
                 PizzaToppings.NOTHING -> emptyList()
             }
 
-            alteredToppingsList[clickedToppingIndex] =
-                toppingsUiState.copy(toppingsImages = toppingList, isSelected = true, toppingsPositions = randomPositions)
+            alteredToppingsList[clickedToppingIndex] = toppingsUiState.copy(
+                    toppingsImages = toppingList,
+                    isSelected = true,
+                    toppingsPositions = randomPositions
+                )
         } else {
-            alteredToppingsList[clickedToppingIndex] =
-                toppingsUiState.copy(toppingsImages = emptyList(), isSelected = false, toppingsPositions = emptyList())
+            alteredToppingsList[clickedToppingIndex] = toppingsUiState.copy(
+                    toppingsImages = emptyList(),
+                    isSelected = false,
+                    toppingsPositions = emptyList()
+                )
         }
 
         val alteredPizzaUiState = pizzaUiState.copy(pizzaToppingsUiState = alteredToppingsList)
@@ -240,7 +248,6 @@ class PizzaPlateViewModel @Inject constructor() : ViewModel(), PizzaPlateInterac
         alteredPizzaStateList[clickedPizzaIndex] = alteredPizzaUiState
 
         _uiState.update { it.copy(pizzaTypes = alteredPizzaStateList) }
-
     }
 
 }

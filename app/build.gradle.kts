@@ -93,4 +93,7 @@ dependencies {
 
     // Annotation processor
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+
+    //UI controller
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
 }

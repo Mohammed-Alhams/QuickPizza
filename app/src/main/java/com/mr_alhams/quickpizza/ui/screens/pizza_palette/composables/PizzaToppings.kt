@@ -2,9 +2,12 @@ package com.mr_alhams.quickpizza.ui.screens.pizza_palette.composables
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -23,10 +26,10 @@ fun PizzaToppings(
     AnimatedVisibility(
         visible = pizzaToppingsUiState.isSelected,
         enter = scaleIn(
-            initialScale = 300f,
-            transformOrigin = TransformOrigin(5f, 5f)
+            initialScale = pizzaSize.toFloat(),
+            transformOrigin = TransformOrigin(5f, 5f),
         ),
-        exit = scaleOut()
+        exit = scaleOut(),
     ) {
 
         pizzaToppingsUiState.toppingsImages.forEachIndexed { index, toppingImage ->
