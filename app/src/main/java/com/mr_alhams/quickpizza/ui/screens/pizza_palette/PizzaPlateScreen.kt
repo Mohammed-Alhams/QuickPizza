@@ -120,7 +120,7 @@ fun PizzaPlateContent(
 
             PizzaBread(state.pizzaTypes[currentIndex]) { pizzaSize ->
                 state.pizzaTypes[currentIndex].pizzaToppingsUiState.forEach { pizzaToppingsUiState ->
-                    PizzaToppings(pizzaToppingsUiState, pizzaSize)
+                    PizzaToppings(pizzaToppingsUiState, pizzaSize, modifier = Modifier.matchParentSize())
                 }
             }
 
